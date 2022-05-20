@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajax学习</title>
+</head>
+  <script>
+      //窗口加载时 直接加载上
+     window.onload = function f() {
+         var date = new Date();
+         document.getElementById('currentTime').innerText = date.getDate();
+      }
+
+      function loadPage() {
+          var targetURL = document.getElementById("url").value;
+          //打印
+          console.log(targetURL);
+          //相当于给下面的iframe给了加载的地址
+          document.getElementById('iframePosition').src = targetURL;
+      }
+  </script>
+
+
+<body>
+<div>
+    <p>请输入要加载的地址：<span id="currentTime"></span></p>
+    <p>
+        <input type="text" id="url" value="https://www.bilibili.com/">
+        <input type="button" value="提交" onclick="loadPage()">
+    </p>
+</div>
+<div>
+    <h3>
+        加载页面的额地址：
+    </h3>
+    <iframe style="width: 100%;height: 500px" id="iframePosition" >
+
+    </iframe>
+</div>
+
+</body>
+
+<html/>

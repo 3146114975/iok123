@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boot.mapper.UserMapper">
+    <select id="getUserList"  resultType="com.boot.bean.User">
+        select u.*,r.roleName as userRoleName from smbms_user u,smbms_role r where u.userRole = r.id
+        <if test="u.username !=null">
+            AND u.username LIKE  #{username} </if>
+         <if test="u.userRole != 0">
+             and u.userRole = #{userRole}
+         </if>
+    </select>
+</mapper>

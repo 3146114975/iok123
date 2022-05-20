@@ -1,0 +1,43 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Order Management System</title>
+    <meta charset="UTF-8" />
+    <link type="text/css" rel="stylesheet" href="css/style2.css"/>
+</head>
+<body>
+<section class="w3l-hotair-form">
+    <h1>Rental Management system </h1>
+    <div class="container">
+        <div class="workinghny-form-grid">
+            <div class="main-hotair">
+                <div class="content-wthree">
+                    <h2>Log In</h2>
+                    <form class="loginForm" th:action="@{/login}" method="post" name="actionForm"
+                          id="actionForm">
+                        <div class="info">[[${error}]]</div>
+                        <input type="text" class="text" id="userCode" name="userCode" placeholder="User Name"
+                               required="" autofocus>
+                        <input type="password" class="password" id="userPassword" name="userPassword"
+                               placeholder="User Password" required="" autofocus>
+                        <button class="btn" type="submit">Log In</button>
+                    </form>
+
+                </div>
+                <div class="w3l_form align-self">
+                    <div class="left_grid_info">
+                        <img src="images/123.png" alt="" class="img-fluid" height="250">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    </div>
+
+</section>
+
+</body>
+
+</html>

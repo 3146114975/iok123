@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common :: commonhead">
+</head>
+<body>
+<!--头部-->
+<header th:replace="common :: commonheader"></header>
+
+
+
+<!--时间-->
+<section th:replace="common :: commonsessiontime"></section>
+
+
+
+<!--主体内容-->
+<section  class="publicMian ">
+
+    <div th:replace="common :: commonleft"></div>
+
+    <div class="right">
+        <div class="location">
+            <strong>你现在所在的位置是:</strong>
+            <span>用户管理页面</span>
+        </div>
+        <div class="search">
+<!--            http://localhost:8080/userlist?method=query&queryName=&queryUserRole=0  -->
+            <form method="get"  th:action="@{/userlist}">
+<!--                <input name="method" value="query" class="input-text" type="hidden">-->
+                <span>用户名：</span>
+                <input name="queryName" class="input-text" type="text" value="">
+
+                <span>用户角色：</span>
+                <select name="queryUserRole">
+                        <option value="0">--请选择--</option>
+                                                       <!--  切记： 获取遍历的值要加一个th：      -->
+                       <option th:each="role:${roleList}" th:value="${role.id}">[[${role.roleName}]]</option>
+                </select>
+
+
+<!--                <input type="hidden" name="pageIndex" value="1"/>-->
+                <input value="查 询" type="submit" id="searchbutton">
+                <a th:href="@{/useradd}">添加用户</a>
+            </form>
+        </div>
+        <!--用户-->
+        <table class="providerTable" cellpadding="0" cellspacing="0">
+            <tr class="firstTr">
+                <th width="10%">用户编码</th>
+                <th width="20%">用户名称</th>
+                <th width="10%">性别</th>
+                <th width="10%">年龄</th>
+                <th width="10%">电话</th>
+                <th width="10%">用户角色</th>
+                <th width="30%">操作</th>
+            </tr>
+
+                <tr th:each="user,stats:${page.records}">
+                    <td>
+                        <span>[[${user.userCode}]]</span>
+                    </td>
+                    <td>
+                        <span>[[${user.userName}]]</span>
+                    </td>
+                    <td>
+                        <span th:text="${user.gender} ? '男':'女' "></span>
+                    </td>
+                    <td>
+                        <span>[[${user.age}]]</span>
+                    </td>
+                    <td>
+                        <span>[[${user.phone}]]</span>
+                    </td>
+                    <td>
+                        <span>[[${user.userRoleName}]]</span>
+                    </td>
+                    <td>
+                    <span><a class="viewUser" href="" ><img
+                            src="images/read.png" alt="查看" title="查看"/></a></span>
+                        <span><a class="modifyUser" href="" ><img
+                                src="images/xiugai.png" alt="修改" title="修改"/></a></span>
+                        <span><a class="deleteUser" th:href="@{/userdelete/{id}(id=${user.id},pn=${page.current})}" ><img
+                                src="images/schu.png" alt="删除" title="删除"/></a></span>
+                    </td>
+                </tr>
+
+        </table>
+<!--        分页表格-->
+        <div class="row-fluid">
+            <div class="span6">
+                <div class="dataTables_info" id="hidden-table-info_info">当前第[[${page.current}]]页 总计[[${page.pages}]]页  总共[[${page.total}]]记录</div>
+            </div>
+            <div class="span6">
+                <div class="dataTables_paginate paging_bootstrap pagination">
+                    <ul>
+                        <li class="next"><a th:href="@{/userlist(pn=${page.current}-1)}">← Previous</a></li>
+                        <!--      #numbers.sequence(1,page.pages)  查询页数 从一页到最后一页                -->
+                        <!--          active 表示那个页码按钮变绿 css写好的类         -->
+                        <li th:class="${num==page.current ? 'active' : ''}" th:each="num:${#numbers.sequence(1,page.pages)}">
+                            <a th:href="@{/userlist(pn=${num})}">[[${num}]]</a></li>
+                        <li class="next"><a th:href="@{/userlist(pn=${page.current}+1)}">Next → </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+<!--        自己写-->
+<!--        <div>-->
+<!--            <div>当前第[[${page.current}]]页 总计[[${page.pages}]]页  总共[[${page.total}]]记录</div>-->
+<!--            <table>-->
+<!--                <tr th:each="num:${#numbers.sequence(1,page.pages)}">-->
+<!--                    <td><a th:href="@{/userlist(pn=${num})}">[[${num}]]</a></td>-->
+<!--                </tr>-->
+<!--            </table>-->
+<!--        </div>-->
+
+<!--        <input type="hidden" id="totalPageCount" value="${totalPageCount}"/>-->
+<!--        <c:import url="rollpage.jsp">-->
+<!--            <c:param name="totalCount" value="${totalCount}"/>-->
+<!--            <c:param name="currentPageNo" value="${currentPageNo}"/>-->
+<!--            <c:param name="totalPageCount" value="${totalPageCount}"/>-->
+<!--        </c:import>-->
+    </div>
+
+
+</section>
+<!--点击删除按钮后弹出的页面-->
+<div class="zhezhao"></div>
+<div class="remove" id="removeUse">
+    <div class="removerChid">
+        <h2>提示</h2>
+        <div class="removeMain">
+            <p>你确定要删除该用户吗？</p>
+            <a href="#" id="yes">确定</a>
+            <a href="#" id="no">取消</a>
+        </div>
+    </div>
+</div>
+
+<div th:replace="common :: commonfoot"></div>
+<script type="text/javascript" th:src="@{js/userlist.js}"></script>
+
+</body>
+</html>
+

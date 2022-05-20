@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="commonhead">
+    <meta charset="UTF-8">
+    <title>超市订单管理系统</title>
+    <link type="text/css" rel="stylesheet" th:href="@{css/style.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{css/public.css}"/>
+</head>
+<body>
+<div>
+
+
+</div>
+!--头部-->
+<header th:fragment="commonheader" class="publicHeader">
+    <h1>超市订单管理系统</h1>
+    <div class="publicHeaderR">
+        <p><span>下午好！</span><span style="color: #fff21b">[[${session.loginUser.userName}]]</span> , 欢迎你！</p>
+        <a href="/loginout">退出</a>
+    </div>
+</header>
+<!--时间-->
+<section th:fragment="commonsessiontime" class="publicTime">
+    <span id="time">2015年1月1日 11:11  星期一</span>
+    <a href="#">温馨提示：为了能正常浏览，请使用高版本浏览器！（IE10+）</a>
+</section>
+<!--主体内容-->
+<section  class="publicMian ">
+    <div th:fragment="commonleft"class="left">
+        <h2 class="leftH2"><span class="span1"></span>功能列表 <span></span></h2>
+        <nav>
+            <ul class="list">
+                <li><a href="">订单管理</a></li>
+                <li><a href="">供应商管理</a></li>
+                <li><a th:href="@{/userlist(queryName)}">用户管理</a></li>
+                <li><a href="">密码修改</a></li>
+                <li><a href="">退出系统</a></li>
+            </ul>
+        </nav>
+    </div>
+</section>
+<div th:fragment="commonfoot">
+    <footer class="footer">
+        超市订单管理系统
+    </footer>
+    <script  th:src="@{/js/time.js}"></script>
+    <script  th:src="@{/js/jquery-1.8.3.min.js}"></script>
+    <script  th:src="@{/js/common.js}"></script>
+    <script  th:src="@{/calendar/WdatePicker.js}"></script>
+</div>
+
+</body>
+</html>
+
